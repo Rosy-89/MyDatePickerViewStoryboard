@@ -7,13 +7,32 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController{
+    
 
+    @IBOutlet weak var myTitle: UILabel!
+    @IBOutlet weak var myDatePicker: UIDatePicker!
+    
+    let dateFormatter = DateFormatter()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        //dateFormatter.dateFormat = "dd/MM/yyyy"
+        
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .short
+        myDatePicker.datePickerMode = .dateAndTime
+        myTitle.text = dateFormatter.string(from: myDatePicker.date)
+        //myTitle.text = myDatePicker
     }
 
-
+    @IBAction func datePickerChanged(_ sender: UIDatePicker) {
+        
+        myTitle.text = dateFormatter.string(from: sender.date)
+        view.endEditing(true)
+        
+    }
+    
 }
 
